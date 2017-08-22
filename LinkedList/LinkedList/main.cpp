@@ -290,5 +290,23 @@ void DeleteFrontNodeFromCLL (struct CLLNode **head)
 
 int main() {
     
+    int test = 100;
+//
+    int *pnum;
+    int **ppnum = &pnum;
+//
+    pnum = &test;
+    pnum = *ppnum;
+    *pnum = **ppnum;
+    
+    printf("%d\n",test);
+    printf("%d\n",*pnum);
+    printf("%p\n",&test);
+    printf("%p\n",pnum);
+    printf("%d\n", **ppnum);
+    printf("%p\n", *ppnum);
+    printf("%p\n", ppnum);
+    
+    
     return 0;
 }
