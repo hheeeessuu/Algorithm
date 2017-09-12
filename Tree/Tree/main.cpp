@@ -244,9 +244,97 @@ int FindHeightofBinaryTree(struct BinaryTreeNode *root) {
 
 // 문제 12 이진 트리의 가장 깊은 노드를 찾는 알고리즘을 작성하세요.
 
+struct BinaryTreeNode* DeepestNodeinBinaryTree(struct BinaryTreeNode *root) {
+    struct BinaryTreeNode *temp = nullptr;
+    queue<BinaryTreeNode*> Q;
+    
+    if(!root)
+        return 0;
+    Q.push(root);
+    
+    while(!Q.empty()) {
+        temp = Q.front();
+        Q.pop();
+        if(temp->left)
+            Q.push(temp->left);
+        if(temp->right)
+            Q.push(temp->right);
+    }
+    
+    return temp;
+}
 
+// 문제 14 재귀 호출을 사용하지 않고 이진 트리에서 leaf들의 수를 구하는 알고리즘을 제시하세요.
+int NumberOfLeavesInBTusingLevelOrder(struct BinaryTreeNode *root)
+{
+    struct BinaryTreeNode *temp;
+    queue<BinaryTreeNode*> Q;
+    int count = 0;
+    if(!root)
+        return 0;
+    Q.push(root);
+    while (!Q.empty()) {
+        temp = Q.front();
+        Q.pop();
+        if(!temp->left && !temp->right)
+            count++;
+        else {
+            if(temp->left)
+                Q.push(temp->left);
+            if(temp->right)
+                Q.push(temp->right);
+        }
+    }
+    return count;
+}
 
-int main() {
+// 윤성우 열혈 C 자료구조
+
+//#include <stdio.h>
+#include "BinaryTree.hpp"
+
+void ShowIntData(int data)
+{
+    printf("%d ", data);
+}
+
+int main()
+{
+    BTreeNode *bt1 = MakeBTreeNode();       // 노드 bt1 생성
+    BTreeNode *bt2 = MakeBTreeNode();       // 노드 bt2 생성
+    BTreeNode *bt3 = MakeBTreeNode();       // 노드 bt3 생성
+    BTreeNode *bt4 = MakeBTreeNode();       // 노드 bt4 생성
+    BTreeNode *bt5 = MakeBTreeNode();       // 노드 bt5 생성
+    BTreeNode *bt6 = MakeBTreeNode();       // 노드 bt6 생성
+
+    
+    SetData(bt1, 1);    // bt1에 1저장
+    SetData(bt2, 2);    // bt2에 2저장
+    SetData(bt3, 3);    // bt3에 3저장
+    SetData(bt4, 4);    // bt4에 4저장
+    SetData(bt5, 5);    // bt5에 5저장
+    SetData(bt6, 6);    // bt6에 6저장
+    
+    MakeLeftSubTree(bt1, bt2);          // bt2를 bt1의 왼쪽 자식 노드로
+    MakeRightSubTree(bt1, bt3);         // bt3를 bt1의 오른쪽 자식 노드로
+    MakeLeftSubTree(bt2, bt4);          // bt4를 bt2의 왼쪽 자식 노드로
+    MakeRightSubTree(bt2, bt5);
+    MakeLeftSubTree(bt3, bt6);
+    
+    /*// bt1의 왼쪽 자식 노드의 데이터 출력
+    printf("%d \n", GetData(GetLeftSubTree(bt1)));
+    
+    // bt1의 왼쪽 자식 노드의 왼쪽 자식 노드의 데이터 출력
+    printf("%d \n", GetData(GetLeftSubTree(GetLeftSubTree(bt1))));*/
+    
+    PreorderTraverse(bt1, ShowIntData);
+    printf("\n");
+    InorderTraverse(bt1, ShowIntData);
+    printf("\n");
+    PostorderTraverse(bt1, ShowIntData);
+    printf("\n");
     
     return 0;
 }
+
+
